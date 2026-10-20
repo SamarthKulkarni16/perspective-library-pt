@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perspective Library — Livros gratuitos sobre psicologia, emoções e mentalidade</title>
+  <meta name="description" content="Livros curtos gratuitos sobre psicologia, emoções e autodisciplina por Samarth Kulkarni. Leia Como Usar a Raiva a Seu Favor, Como Usar a Procrastinação a Seu Favor, Como Usar Conflitos a Seu Favor e Sobrevivência — uma escrita prática, sem enrolação, sobre por que sentimos e agimos como agimos." />
+  <meta name="keywords" content="livros de psicologia, emoções, autodisciplina, mentalidade, raiva, procrastinação, resolução de conflitos, mecanismo de sobrevivência, livros gratuitos, Perspective Library, samarth kulkarni" />
+  <meta name="author" content="Samarth Kulkarni" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://samarthkulkarni16.github.io/perspective-library-pt/" />
+  <link rel="alternate" hreflang="en" href="https://samarthkulkarni16.github.io/perspective-library/" />
+  <link rel="alternate" hreflang="hi" href="https://samarthkulkarni16.github.io/perspective-library-hi/" />
+  <link rel="alternate" hreflang="ar" href="https://samarthkulkarni16.github.io/perspective-library-ar/" />
+  <link rel="alternate" hreflang="pt" href="https://samarthkulkarni16.github.io/perspective-library-pt/" />
+  <link rel="alternate" hreflang="es" href="https://samarthkulkarni16.github.io/perspective-library-es/" />
+  <link rel="alternate" hreflang="x-default" href="https://samarthkulkarni16.github.io/perspective-library/" />
+  <link rel="icon" type="image/png" href="logo.jpeg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Perspective Library" />
+  <meta property="og:title" content="Perspective Library — Livros gratuitos sobre psicologia, emoções e mentalidade" />
+  <meta property="og:description" content="Livros curtos gratuitos sobre psicologia, emoções e autocontrole — textos práticos e sem enrolação sobre por que nos sentimos e agimos do jeito que nos sentimos e agimos." />
+  <meta property="og:url" content="https://samarthkulkarni16.github.io/perspective-library-pt/" />
+  <meta property="og:image" content="https://samarthkulkarni16.github.io/perspective-library-pt/logo.jpeg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Perspective Library — Livros gratuitos sobre psicologia, emoções e mentalidade" />
+  <meta name="twitter:description" content="Livros curtos gratuitos sobre psicologia, emoções e autodisciplina por Samarth Kulkarni." />
+  <meta name="twitter:image" content="https://samarthkulkarni16.github.io/perspective-library-pt/logo.jpeg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Perspective Library",
+  "url": "https://samarthkulkarni16.github.io/perspective-library-pt/",
+  "description": "Livros curtos gratuitos sobre psicologia, emoções e autodisciplina por Samarth Kulkarni.",
+  "publisher": {
+    "@type": "Person",
+    "name": "Samarth Kulkarni"
+  },
+  "hasPart": [
+    {
+      "@type": "Book",
+      "name": "Como usar a raiva a seu favor",
+      "description": "Raiva não é problema se você sabe o que é.",
+      "genre": "Emoções",
+      "url": "https://samarthkulkarni16.github.io/perspective-library-pt/#book/anger",
+      "author": {
+        "@type": "Person",
+        "name": "Samarth Kulkarni"
+      }
+    },
+    {
+      "@type": "Book",
+      "name": "Use a procrastinação a seu favor",
+      "description": "Pare de lutar contra ela. Comece a redirecioná-la.",
+      "genre": "Produtividade",
+      "url": "https://samarthkulkarni16.github.io/perspective-library-pt/#book/procrastination",
+      "author": {
+        "@type": "Person",
+        "name": "Samarth Kulkarni"
+      }
+    },
+    {
+      "@type": "Book",
+      "name": "Use os conflitos a seu favor",
+      "description": "Você não precisa fugir dos problemas. Precisa fazer upgrade neles.",
+      "genre": "Mentalidade",
+      "url": "https://samarthkulkarni16.github.io/perspective-library-pt/#book/conflicts",
+      "author": {
+        "@type": "Person",
+        "name": "Samarth Kulkarni"
+      }
+    },
+    {
+      "@type": "Book",
+      "name": "Sobrevivência",
+      "description": "Entendendo a base de tudo o que fazemos.",
+      "genre": "Psicologia",
+      "url": "https://samarthkulkarni16.github.io/perspective-library-pt/#book/survival",
+      "author": {
+        "@type": "Person",
+        "name": "Samarth Kulkarni"
+      }
+    }
+  ],
+  "inLanguage": "pt"
+}
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rye&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #000;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f0;
+      --muted: #666;
+      --accent: #e8e8e8;
+      --accent-dim: rgba(255,255,255,0.05);
+    }
+html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Public SEO preview — visible to everyone, no login required */
+    #seo-preview { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+    #seo-preview h1 { font-family: 'Rye', serif; font-size: 24px; margin-bottom: 10px; }
+    #seo-preview > p.intro { color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 32px; max-width: 560px; }
+    #seo-preview article { border-top: 1px solid var(--border); padding: 20px 0; }
+    #seo-preview article h2 { font-size: 16px; margin-bottom: 4px; }
+    #seo-preview article .cat { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    #seo-preview article .sub { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 10px; }
+    #seo-preview article p { font-size: 13px; line-height: 1.7; color: #b8b8b8; }
+    #seo-preview .cta { margin-top: 32px; font-size: 12px; color: var(--muted); }
+    #seo-preview .cta a { color: var(--text); }
+
+    /* AUTH */
+    #auth-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .auth-box { width: 100%; max-width: 380px; }
+    .auth-header { text-align: center; margin-bottom: 16px; }
+    .auth-logo { display: block; margin: 0 auto 12px; width: 56px; height: 56px; max-width: 56px; border-radius: 50%; overflow: hidden; }
+    .auth-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+    .auth-title { font-family: 'Rye', serif; font-size: 20px; color: var(--text); letter-spacing: 0.02em; }
+    .auth-sub { margin-top: 4px; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+    .auth-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 20px; }
+    .btn-google {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #fff; color: #1a1a1a; border: none; border-radius: 12px; padding: 12px;
+      font-family: 'Inter', sans-serif; font-size: 13px; cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.3); letter-spacing: 0.02em;
+    }
+    .btn-google:hover { background: #f5f5f5; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .btn-google svg { flex-shrink: 0; }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px; margin: 14px 0;
+      color: var(--muted); font-size: 11px;
+    }
+    .divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .field input {
+      width: 100%; background: #050505; border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text);
+      outline: none; transition: border-color 0.15s;
+    }
+    .field input::placeholder { color: #444; }
+    .field input:focus { border-color: rgba(255,255,255,0.3); box-shadow: 0 0 0 3px rgba(255,255,255,0.05); }
+
+    .btn-enter {
+      width: 100%; background: #f0f0f0; color: #0f0f0f; border: none; border-radius: 12px;
+      padding: 12px; font-family: 'Inter', sans-serif; font-size: 13px; cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s; margin-top: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); letter-spacing: 0.03em;
+    }
+    .btn-enter:hover { opacity: 0.9; }
+    .btn-enter:active { transform: scale(0.99); }
+    .btn-enter:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .auth-error {
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 10px; padding: 10px 14px; font-size: 13px; color: #f87171;
+      margin-top: 14px; display: none;
+    }
+
+    /* LIBRARY */
+    #library-screen { display: none; height: 100vh; overflow: hidden; flex-direction: column; }
+
+    .lib-header {
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .lib-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .lib-brand-logo { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .lib-brand-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lib-brand-name { font-family: 'Rye', serif; font-size: 14px; color: var(--text); letter-spacing: 0.02em; }
+    .lib-right { display: flex; align-items: center; gap: 14px; }
+    .user-avatar {
+      width: 26px; height: 26px; border-radius: 50%; background: #333;
+      border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700; color: #fff; overflow: hidden;
+    }
+    .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .btn-nav {
+      background: none; border: 1px solid var(--border); border-radius: 8px; padding: 4px 11px;
+      font-family: 'Inter', sans-serif; font-size: 11px; color: var(--muted); cursor: pointer;
+      transition: color 0.15s, border-color 0.15s; letter-spacing: 0.02em;
+    }
+    .btn-nav:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+    .lib-main { flex: 1; overflow-y: auto; padding: 32px 32px 24px; }
+    .lib-heading { margin-bottom: 28px; }
+    .lib-heading-eyebrow { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .lib-heading h1 { font-size: 26px; color: var(--text); letter-spacing: 0.02em; }
+
+    /* BOOK GRID */
+    #book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 20px; }
+
+    .book-card { cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s; }
+    .book-card:hover { transform: translateY(-3px); }
+
+    .book-cover {
+      aspect-ratio: 2/3; border-radius: 5px 10px 10px 5px; position: relative; overflow: hidden;
+      box-shadow: -4px 0 0 0 rgba(0,0,0,0.4), 4px 4px 20px rgba(0,0,0,0.6), inset -3px 0 6px rgba(0,0,0,0.3);
+      display: flex; flex-direction: column; justify-content: space-between; padding: 14px 12px;
+    }
+    .book-cover::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+      background: rgba(0,0,0,0.35); border-radius: 5px 0 0 5px; z-index: 1;
+    }
+    .book-cover::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .book-category { position: relative; z-index: 2; font-size: 7px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+    .book-title-cover { position: relative; z-index: 2; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.92); }
+    .book-meta { display: flex; flex-direction: column; gap: 2px; }
+    .book-title-below { font-size: 11px; color: var(--text); line-height: 1.4; }
+    .book-subtitle-below { font-size: 10px; color: var(--muted); line-height: 1.4; }
+    .book-readtime { font-size: 10px; color: #444; margin-top: 1px; }
+    /* EMPTY STATE */
+    #empty-state { display: none; text-align: center; padding: 80px 0; color: var(--muted); }
+    #empty-state svg { width: 48px; height: 48px; margin: 0 auto 16px; opacity: 0.3; }
+    #empty-state h2 { font-size: 20px; color: #444; margin-bottom: 8px; }
+    #empty-state p { font-size: 13px; color: #3a3a3a; max-width: 320px; margin: 0 auto; line-height: 1.6; }
+
+    /* MODAL */
+    #modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 24px; overflow-y: auto;
+    }
+    #modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+
+    .modal {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+      width: 100%; max-width: 680px; margin: auto; padding: 0; overflow: hidden;
+      animation: modal-in 0.2s ease;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-cover-bar { height: 6px; width: 100%; }
+    .modal-header { padding: 28px 32px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .modal-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .modal-title { font-size: 22px; line-height: 1.35; color: var(--text); }
+    .modal-subtitle { margin-top: 8px; font-size: 15px; color: var(--muted); line-height: 1.5; font-style: italic; }
+    .modal-close {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--surface2);
+      border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;
+      transition: color 0.15s, background 0.15s;
+    }
+    .modal-close:hover { color: var(--text); background: #2a2a2a; }
+    .modal-divider { margin: 24px 32px 0; height: 1px; background: var(--border); }
+
+    /* PROGRESS */
+    #modal-progress-wrap { padding: 14px 32px 0; display: none; }
+    #modal-progress-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; margin-bottom: 6px; }
+    #modal-progress-fill { height: 100%; background: #e8e8e8; border-radius: 99px; width: 0%; transition: width 0.3s ease; }
+    #modal-progress-text { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
+    #modal-completed-text { padding: 14px 32px 0; font-size: 12px; color: #aaa; letter-spacing: 0.06em; display: none; }
+
+    /* READING AREA */
+    .modal-body {
+      padding: 20px 32px 36px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    /* Rich content styles inside modal */
+    .modal-body p {
+      margin-bottom: 1.2em;
+    }
+    .modal-body h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.8em 0 0.6em;
+      letter-spacing: 0.01em;
+    }
+    .modal-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ddd;
+      margin: 1.4em 0 0.5em;
+      letter-spacing: 0.01em;
+    }
+    .modal-body strong {
+      color: #e8e8e8;
+      font-weight: 600;
+    }
+    .modal-body ul, .modal-body ol {
+      padding-left: 1.4em;
+      margin-bottom: 1em;
+    }
+    .modal-body li {
+      margin-bottom: 0.4em;
+    }
+
+    /* TABLE STYLES */
+    .modal-body .table-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin: 1.8em 0 0.6em;
+    }
+    .modal-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.4em;
+      font-size: 14px;
+    }
+    .modal-body table th {
+      background: rgba(255,255,255,0.06);
+      color: #e0e0e0;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
+    }
+    .modal-body table td {
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #bbb;
+      vertical-align: top;
+    }
+    .modal-body table tr:nth-child(even) td {
+      background: rgba(255,255,255,0.02);
+    }
+    .modal-body table .td-no {
+      color: #444;
+      font-style: italic;
+    }
+
+    .modal-body-empty { padding: 20px 32px 36px; font-size: 14px; color: #444; font-style: italic; }
+
+    /* LOADING */
+    #loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .spinner { width: 28px; height: 28px; border: 2px solid rgba(255,255,255,0.1); border-top-color: #ccc; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+   @media (max-width: 600px) {
+      html, body { height: 100dvh; }
+      .lib-main { padding: 24px 16px 16px; }
+      .lib-header { padding: 0 16px; }
+      #book-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; }
+      .modal-header { padding: 22px 20px 0; }
+      .modal-divider { margin: 18px 20px 0; }
+      #modal-progress-wrap, #modal-completed-text { padding-left: 20px; padding-right: 20px; }
+      .modal-body, .modal-body-empty { padding: 16px 20px 28px; }
+      .modal-title { font-size: 18px; }
+      .modal-body table { font-size: 12px; }
+      .modal-body table th, .modal-body table td { padding: 7px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading-screen">
+  <div class="spinner"></div>
+</div>
+
+<!-- Auth -->
+<div id="auth-screen" style="display:none">
+  <div class="auth-box">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <img src="logo.jpeg" alt="Perspective Library" />
+      </div>
+      <div class="auth-title">Perspective Library</div>
+      <div class="auth-sub">Uma sala de leitura privada.</div>
+    </div>
+    <div class="auth-card">
+      <button class="btn-google" id="btn-google">
+        <svg width="18" height="18" viewBox="0 0 18 18">
+          <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+          <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/>
+          <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"/>
+          <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/>
+        </svg>
+        Continuar com o Google
+      </button>
+      <div class="divider">ou</div>
+      <form id="email-form" autocomplete="off">
+        <div class="field">
+          <label>Nome</label>
+          <input type="text" id="field-name" placeholder="Seu nome" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="field-email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label>Senha</label>
+          <input type="password" id="field-password" placeholder="••••••••" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn-enter" id="btn-enter">Entrar na biblioteca</button>
+      </form>
+      <div class="auth-error" id="auth-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Library -->
+<div id="library-screen">
+  <header class="lib-header">
+  <a class="lib-brand" href="#">
+      <div class="lib-brand-logo">
+        <img src="logo.jpeg" alt="Perspective Library" />
+      </div>
+      <span class="lib-brand-name">Perspective Library</span>
+    </a>
+    <div class="lib-right">
+      <div class="user-avatar" id="user-avatar-el"></div>
+      <button class="btn-nav" id="btn-signout">Sair</button>
+    </div>
+  </header>
+  <main class="lib-main">
+    <div class="lib-heading">
+      <div class="lib-heading-eyebrow">Sua coleção</div>
+      <h1>A biblioteca</h1>
+    </div>
+    <div id="book-grid"></div>
+    <div id="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+      <h2>The shelves are empty.</h2>
+      <p>Books will appear here once they're added to the <code style="background:#1e1e1e;padding:2px 6px;border-radius:4px;font-size:11px">ARTICLES</code> array in the source code.</p>
+    </div>
+  </main>
+</div>
+
+<!-- Modal -->
+<div id="modal-overlay">
+  <div class="modal">
+    <div class="modal-cover-bar" id="modal-cover-bar"></div>
+    <div class="modal-header">
+      <div>
+        <div class="modal-eyebrow" id="modal-eyebrow"></div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-subtitle" id="modal-subtitle"></div>
+      </div>
+      <button class="modal-close" id="modal-close">&#215;</button>
+    </div>
+    <div class="modal-divider"></div>
+    <div id="modal-progress-wrap">
+      <div id="modal-progress-track">
+        <div id="modal-progress-fill"></div>
+      </div>
+      <div id="modal-progress-text">0% concluído</div>
+    </div>
+    <div id="modal-completed-text">Concluído ✓</div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ─── BOOKS ────────────────────────────────────────────────────────────────────
+const ARTICLES = [
+  {
+    "slug": "anger",
+    "title": "Como usar a raiva a seu favor",
+    "subtitle": "A raiva não é um problema se você sabe o que ela é",
+    "category": "Emoções",
+    "color": "linear-gradient(135deg, #1a1a2e, #16213e)",
+    "content": "A raiva sempre é associada ao ruim e ao mal. Na nossa sociedade, a raiva é tratada como se fosse uma doença. E se você não sabe como usá-la, ela vira uma doença. Não se preocupe — aqui vamos discutir a raiva de forma breve e simples, com passos práticos.\n\n1. O que é Raiva?\n\nRaiva é a emoção que você sente quando acha que algo tá errado. Não importa se realmente está certo ou errado; se você sente, fica bravo. Isso pode acontecer por causa de sentimentos de injustiça, desrespeito, etc.\n\n2. O Que Acontece de Verdade Quando Você Fica Bravo?\n\nQuando você fica com raiva, biologicamente, seu corpo começa a se preparar para uma briga — seja verbal ou física.\n\nA. Seu Córtex Pré-Frontal é Suprimido\n\nO córtex pré-frontal é a parte da frente do seu cérebro responsável por raciocínio, julgamento e controle de impulsos. Em resumo, seu QI cai e você fica menos inteligente durante esse período. Como resultado, você para de pensar logicamente. É por isso que você vê pessoas discutindo sobre assuntos tão idiotas que nem fazem sentido para elas depois que se acalmam.\n\nB. Correria de Adrenalina\n\nA adrenalina despeja hormônios do estresse na sua corrente sanguínea, fazendo seu coração bater mais rápido, aumentando o fornecimento de energia, fortalecendo seus músculos e aumentando sua tolerância à dor. Agora você está pronto para lutar.\n\nMas com essas coisas acontecendo, você acaba tomando decisões erradas — bater em alguém, gritar com alguém, etc.\n\nAgora vamos estudar como usar a raiva a seu favor. Nós classificamos a raiva em 2 categorias: Verbal e Física.\n\n1. Raiva verbal\n\nEssa é uma forma bem menos forte de raiva. Raiva verbal significa que você ficou bravo porque quer falar algo pra alguém. Tipo, seu amigo estragou seu plano e agora você tá com vontade de dar um grito na cara dele. Quando você quer soltar alguma coisa com raiva pra alguém — isso é raiva verbal.\n\nComo Usar Isso a Seu Favor:\n\nQuando você receber raiva verbal, pegue o seu celular e comece uma gravação de áudio. Grave tudo o que você quer dizer. Não poste em lugar nenhum — só grave. Quando você se acalmar, revise a gravação.\n\nPorque quando você fica com raiva, fala o que realmente quer dizer sem hesitar. Essa é a fala mais clara. Revise e, se tiver algo importante, anote. Se não, apague a gravação.\n\n2. Raiva Física\n\nEsse é o nível mais alto de raiva. Aqui, você quer atacar alguém fisicamente porque cometeu um erro gigante. Acontece por causa da adrenalina. É fácil de identificar — quando você quer dar um soco em alguém, é raiva física.\n\nComo Usar Isso a Seu Favor:\n\nQuando você sentir raiva física, faça 50 flexões. Ou faça 50 agachamentos. É só isso. Você tem que usar essa energia. Se você não direcionar essa energia, vai levar ao desastre. Faça qualquer tipo de treino. Se quiser lutar, tente sombra de boxe.\n\nUsa a raiva como um nitro — assim como num carro, ela te dá um pico de energia. Mas não fica viciado nisso. A raiva é um booster porque surge do nada. Não é uma ferramenta porque ferramenta fica pra sempre, e a raiva não.\n\nAté logo.\n\nSeu amigo,\nSamarth Kulkarni"
+  },
+  {
+    "slug": "procrastination",
+    "title": "Use a procrastinação a seu favor",
+    "subtitle": "Pare de lutar contra ela. Comece a redirecioná-la.",
+    "category": "Produtividade",
+    "color": "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+    "isHtml": true,
+    "content": "\n<p>Um problema enorme que todo mundo conhece como procrastinação. Isso tá super na moda. O problema é que as pessoas já falaram tanto sobre isso, de tantos ângulos diferentes, que acabou ficando ainda mais confuso. Então, você está no lugar certo que você precisa. Primeiro a gente vai entender e depois aprender a usar isso a nosso favor em vez de resolver — você sabe como que é o nosso jeito.<\/p>\n\n<h2>1. O que é procrastinação?<\/h2>\n<p>Quando você precisa fazer algo mas está evitando e fazendo outras coisas, é procrastinação. Você já sabe disso, então vamos ao próximo assunto sem perder tempo.<\/p>\n\n<h2>2. Por que a procrastinação acontece?<\/h2>\n<p>Quando tem algo pra fazer tipo trabalho, o cérebro começa a pensar. A gente também é animal e o cérebro funciona como animal. O trabalho principal do nosso cérebro é a sobrevivência. E pra sobreviver, a gente foca no presente, não no futuro — porque se a gente sobreviver agora, a gente vai estar lá depois. Por isso o cérebro foca mais em recompensa imediata.<\/p>\n\n<p>Para entender a procrastinação, a gente precisa parar de pensar em termos de tempo e pensar em termos de energia. Leia a comparação a seguir:<\/p>\n\n<p class=\"table-label\"><strong>Trabalho<\/strong><\/p>\n<table>\n  <thead>\n    <tr>\n      <th>Perda Atual<\/th>\n      <th>Recompensa Imediata<\/th>\n      <th>Recompensas a longo prazo<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    <tr>\n      <td>Energia em Grande Quantidade<\/td>\n      <td class=\"td-no\">Não<\/td>\n      <td>Disciplina<\/td>\n    <\/tr>\n    <tr>\n      <td>tédio<\/td>\n      <td class=\"td-no\">Não<\/td>\n      <td>Trabalho feito<\/td>\n    <\/tr>\n  <\/tbody>\n<\/table>\n\n<p class=\"table-label\"><strong>TV<\/strong><\/p>\n<table>\n  <thead>\n    <tr>\n      <th>Perda Atual<\/th>\n      <th>Recompensa Imediata<\/th>\n      <th>Recompensas a longo prazo<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    <tr>\n      <td>Energia em quantidade bem pequena<\/td>\n      <td>Muito divertido<\/td>\n      <td class=\"td-no\">Não<\/td>\n    <\/tr>\n    <tr>\n      <td>Quase Sem Atrito<\/td>\n      <td>Sensação de ter feito as coisas<\/td>\n      <td class=\"td-no\">Não<\/td>\n    <\/tr>\n  <\/tbody>\n<\/table>\n\n<p>Percebeu? O trabalho tá levando muito e não dá nada na hora, enquanto a TV tá pegando quase nada e entregando demais. Por isso a gente escolhe isso. Foi feito assim. A gente foca mais nos ganhos atuais do que nos benefícios a longo prazo, porque não sabemos se vamos estar lá quando eles chegarem — mas sabemos que estamos vivos agora.<\/p>\n\n<p>Então, como entendemos que nosso mecanismo natural foca no curto prazo em vez do longo prazo, vamos usar isso a nosso favor. Antes, vou te contar minha história de como aprendi isso.<\/p>\n\n<h2>Minha História<\/h2>\n<p>Era fevereiro de 2025. Meu primeiro vídeo foi carregado em 16 de janeiro de 2025. Eu costumava pensar que tinha uma ótima habilidade de falar inglês na frente de uma câmera. Mas depois da minha primeira gravação, percebi — era tão difícil falar em um idioma que nunca falei e fazer isso na frente de uma câmera. Eu queria fazer mais vídeos, mas era muito difícil e não tinha recompensa. Então eu fiz isso. Procrastinação.<\/p>\n\n<p>Mas o problema era que, depois de passar o dia inteiro fazendo coisa aleatória, todo santo dia, na hora de deitar, eu sentia a dor de não ter feito nada. Eu sei que você já sentiu isso também. E é terrível.<\/p>\n\n<p>Então, um dia, eu decidi organizar meu armário porque estava bagunçado. Passei umas horas limpando e, quando fui dormir aquele dia, senti que tinha feito algo. No dia seguinte, quando veio a ideia de gravar, resolvi organizar minha mesa de estudo em vez disso. No outro dia, li 20 páginas de um livro. Os dias foram passando assim e eu acabei organizando meu quarto inteiro, li 2 livros, comecei 2 novos hábitos — só procrastinando. (Depois eu gravei o vídeo, que era justamente sobre esse tema.)<\/p>\n\n<h2>Usando a procrastinação — Os passos<\/h2>\n<p>Você pode tirar uma captura de tela ou anotar isso nas notas. Mas eu recomendo que você use só uma vez — você vai lembrar muito melhor.<\/p>\n\n<h3>Passo 1 — Encontre algo para procrastinar<\/h3>\n<p>Encontre algo que você queira fazer, mas que seja muito difícil. Não escolha algo trivialmente pequeno. Algo que você vai fazer agora ou depois, mas que seja muito difícil. Quanto mais difícil for a tarefa para procrastinar, mais variedade você terá no próximo passo.<\/p>\n\n<h3>Etapa 2 — Encontre uma tarefa produtiva que seja relativamente mais fácil<\/h3>\n<p>Depois de decidir o que vai procrastinar, encontra tarefas que sejam produtivas e,相比之下, mais fáceis. Exemplos: limpar, organizar, passear, ler, etc. Escolhe a que combinar mais contigo.<\/p>\n\n<h3>Passo 3 — Procrastinar<\/h3>\n<p>Todo dia, use esse framework:<\/p>\n<p><strong>Hoje, eu não vou _______ (a coisa difícil), mas ao invés disso eu _______ (coisa relativamente mais fácil).<\/strong><\/p>\n<p>Por exemplo:<br>\n1. Hoje, eu não vou gravar um vídeo, mas ao invés disso, vou limpar meu armário.<br>\n2. Hoje, eu não vou trabalhar no projeto, mas ao invés disso, vou organizar minhas fotos.<\/p>\n\n<h2>Notas Finais<\/h2>\n<p>Essa técnica funciona muito bem. Uma coisa é: você mesmo assim tem que fazer as coisas difíceis com o tempo — eu fiz o vídeo depois de procrastinar, sabe. Mas usar essa técnica é bem melhor do que só procrastinar e não ter nada pra mostrar no final.<\/p>\n\n<p>Vai e procrastina.<\/p>\n\n<p>Te vejo.<br>\nSeu amigo,<br>\n<strong>Samarth Kulkarni<\/strong><\/p>\n    "
+  },
+  {
+    "slug": "conflicts",
+    "title": "Use os conflitos a seu favor",
+    "subtitle": "Você não precisa fugir dos problemas. Precisa fazer upgrade neles.",
+    "category": "Mentalidade",
+    "color": "linear-gradient(135deg, #1a0a00, #3d1f00, #1a0a00)",
+    "isHtml": true,
+    "content": "\n<p>Conflitos estão por toda parte. Aqui, ali, com você, comigo, com os pobres, com os ricos, com os velhos, com os bebês, com as árvores, com os animais, todo mundo. (Conflitos são muito leais porque nunca te deixam, haha). Todo mundo quer sair do conflito, mas você consegue? Se não, por quê? Se sim, por quê? E se a gente conseguir sair de todos os conflitos, como vai ser? Vamos ver.<\/p>\n\n<h2>O que são conflitos?<\/h2>\n<p>Conflitos são basicamente quando você quer algo de um certo jeito e não está desse jeito específico. Também conhecidos como 'problemas'. A razão de eu usar a palavra 'conflito' ao invés de 'problema' é porque problemas são algo que você pode resolver e sair dali — mas em conflitos, você precisa continuar participando ativamente para resolvê-los. Você vai entender o que quero dizer.<\/p>\n\n<p>A razão do conflito existir é por causa do <strong>'desejo'<\/strong>. Você pode ter ouvido em algum lugar que 'quanto menos você deseja, menos problemas você tem' — agora faz sentido, pra mim também. Por exemplo: você quer 1 milhão de dólares e não tem (é por isso que você o quer), então tem que trabalhar, aprender, repetir, se esforçar. Esses são os problemas — um conflito. Se você não quer mais dinheiro do que tem agora, não há conflito relacionado ao dinheiro.<\/p>\n\n<p>Não tô dizendo \"não ter nenhum desejo e viver como as coisas são\" — porque isso também vai dar problema. Não vou te dar um conselho tipo Buda. Vou explicar e te dizer quando sair de uma situação de conflito e quando entrar nela. Porque se você nunca tiver conflito, a vida segue de um jeito bem diferente — e a gente também vai falar sobre isso. Em resumo: <strong>Como Usar Conflitos A Seu Favor.<\/strong><\/p>\n\n<h2>Tudo o que você faz é resolver um conflito<\/h2>\n<p>Olhe para você mesmo. O que você está fazendo? Lendo este livro. Por quê? Porque você quer entender e usar o conflito a seu favor. Esse é um conflito que você está resolvendo. Você está vestindo roupa porque não quer ficar nu. Também é um conflito. Você está respirando porque não quer morrer. É um conflito passivo que você participa sem pensar ativamente nele. Você come porque não quer morrer de fome e porque precisa de energia. Um conflito.<\/p>\n\n<p>Viu o padrão? Cada coisa que você faz é resolver algo. O que eu percebi é que tudo que qualquer um faz é resolver um problema.<\/p>\n\n<p>Para hoje, você pode deixar o livro aqui e só observar a sua vida e a dos outros e ver os conflitos em que eles estão. Porque você sabe, todos os livros da Perspective Library não são só para ler — são para benefícios reais na vida, através da ação. Então, você pode e <strong>NEED<\/strong> deixar o livro agora e começar a observar. Depois de fazer isso por pelo menos um dia, você pode e <strong>NEED<\/strong> voltar aqui e continuar.<\/p>\n\n<p><em>{Se você não fizer as observações, você vai saber a ideia, mas não vai entender e não vai conseguir usá-la de forma eficaz na sua vida. É chato e difícil, e é por isso que funciona.}<\/em><\/p>\n\n<h2>Por que as pessoas sofrem com coisas como problemas de relacionamento e problemas mentais<\/h2>\n<p>Você vai ver muita gente, especialmente nos dias de hoje, se meter em coisas como depressão, ansiedade, problema de relacionamento e essas coisas. Muita gente já passou por isso. E como eu também já passei, vou te contar uma história.<\/p>\n\n<p>Foi em 2022 e eu sofri meu primeiro rompimento. Uma garota que eu amava há 5 anos. (Vou escrever um livro diferente totalmente dedicado a essa história — você pode gostar também.) Quando eu sofri o rompimento, assim como a maioria das pessoas, comecei a ficar deprimido. Eu estava aproveitando a depressão, na verdade. Comecei a pensar demais, a estressar, a sentir ansiedade. E, como todo mundo, eu queria sair.<\/p>\n\n<p>Mas a parte mais interessante é que não lembro quando saí disso. A sério. Não lembro o dia, o mês, a estação, nem o ano. Foi automático. Há apenas alguns dias, eu estava pensando nisso e a ideia de \"como usar os conflitos a seu favor\" veio à cabeça.<\/p>\n\n<p>Eu sei por que a mudança aconteceu. Ela aconteceu porque <strong>eu fiquei ocupado<\/strong>. Eu até esqueci que estava deprimido. Como? Porque eu me enchi de conflitos. Comecei a treinar, a estudar sobre dinheiro, e fiquei tão ocupado com essas coisas que simplesmente esqueci dos problemas mentais. KKKK. Mas funcionou.<\/p>\n\n<p>Aqui está a decodificação do \"por que as pessoas entram em depressão\" — <strong>as pessoas ficam deprimidas porque um conflito foi resolvido.<\/strong> Quando as pessoas ficam deprimidas? Quando alguém as deixa, quando alguém morre, quando elas fracassam no que estavam fazendo. Todos esses eventos são o fim de um conflito. Quando algo é removido, ELE DEVE ser substituído por outras coisas para manter o equilíbrio.<\/p>\n\n<p>Quando eu amava uma garota há 5 anos, eu estava ocupado com o conflito de como propor a ela, como falar com ela, como conseguir o número dela, etc. Mas quando eu sofri um rompimento, todo o conflito acabou. Ficou vazio. Mas nosso cérebro é treinado para resolver conflitos — e quando você não tem conflito, ele cria um. Ou seja: problemas mentais. Faz sentido?<\/p>\n\n<p>Depois da fase dos meus problemas mentais, quando eu estava focado em ganhar músculos e dinheiro, meu conflito mudou. Agora eu tinha problemas tipo — quais exercícios fazer? O que comer? Quando treinar? Como ganhar dinheiro? Qual negócio? O que fazer se eu não tenho capital? Meu cérebro ficou ocupado nesse conflito e esqueceu o antigo.<\/p>\n\n<h2>Você não se livra dos problemas. Você melhora eles.<\/h2>\n<p>O mendigo na rua está em conflito pra conseguir comida. Ele acha que se tiver comida, vai se livrar dos problemas. Mas não é bem assim. Depois que ele tiver comida, vai procurar roupas melhores, uma casa, amigos, mais dinheiro, cargos mais altos, família, e tal.<\/p>\n\n<p>Os conflitos não vão terminar. Eles acabam quando você morre.<\/p>\n\n<h2>Como usar isso — os passos<\/h2>\n\n<h3>Passo 1 — Identifique seus conflitos atuais<\/h3>\n<p>Olha quais conflitos você tem. Não leve em conta os óbvios, como comida e sono. Foca nos grandes — negócios, saúde (não aquela \"saúde\" genérica, mas problemas reais e o que você está fazendo a respeito deles), seus relacionamentos, etc. Você pode anotar se quiser. Mas é o entendimento e a consciência disso que a gente precisa.<\/p>\n\n<h3>Passo 2 — Organize-os<\/h3>\n<p>Depois que você sabe quais conflitos você está lutando, encontre aqueles que são <strong>legais de ter<\/strong> — como construir músculos, ganhar dinheiro, aprender uma habilidade. Depois, olhe para aqueles que você <strong>não quer<\/strong> — como problemas mentais, distrações, problemas de relacionamento.<\/p>\n\n<h3>Passo 3 — Substituir<\/h3>\n<p>Agora você só precisa trocar os conflitos indesejados pelos que você quer.<\/p>\n\n<p>Por exemplo — se tá havendo um problema no relacionamento, começa a treinar. No começo não vai fazer sentido, mas pensa comigo: se você treina, a pessoa com quem você tá tendo o problema vai pensar: \"ah, ele tá melhorando, eu preciso fazer algo também.\" E ela vai fazer algo — porque essa é a lei do equilíbrio. Quando vocês dois estão evoluindo, vocês conseguem conversar. Conseguem entender o que cada um tá fazendo. E aí vocês se aproximam de novo.<\/p>\n\n<p>E no pior dos cenários, se vocês se separarem, você ainda vai ter um corpo ótimo para cuidar e não vai deprimir. <strong>Win-win.<\/strong><\/p>\n\n<p>Eu sei que pode soar um pouco complicado ou difícil, mas faça assim. E se houver alguma confusão, ou qualquer dúvida sobre o assunto, me manda um DM no Instagram. Eu estou sempre aqui pra você.<\/p>\n\n<p>Então é isso,<br>\nAté mais.<br><br>\nSeu amigo,<br>\n<strong>Samarth Kulkarni<\/strong><\/p>\n    "
+  },
+  {
+    "slug": "survival",
+    "title": "Sobrevivência",
+    "subtitle": "Entendendo a base de tudo o que fazemos.",
+    "category": "Psicologia",
+    "color": "linear-gradient(135deg, #0a1628, #1a3a2a, #0a1628)",
+    "isHtml": true,
+    "content": "\n<p>Oi, oi! Um novo livro, novo tema. Nesse livro, vamos dar uma olhada num assunto que é tãooooo importante. Não consigo escrever com muitos detalhes porque estou finalizando o livro no limiar do prazo — e se não terminar hoje, vai dar problemas. Nesse livro, abordamos a camada básica, então ele funciona como uma introdução ao tema. Mas esse é um dos meus assuntos favoritos e eu poderia escrever um livro de mil páginas só sobre isso. Se achar algum tópico bem interessante ou gostar do livro inteiro e quiser mais profundidade, me chama no DM do Instagram que eu faço com certeza.<\/p>\n\n<p>Somos animais. Já fomos animais. Então, sempre agimos como animais. Tudo o que fazemos está de alguma forma conectado ao mecanismo de sobrevivência. Esse mecanismo é uma coisa muito, muito importante, porque, sem ele, a gente morre. É como a gente viu antes: teve a invenção do 0 e do 1, que foi e ainda é usada na computação. E agora a gente tem as invenções e o uso de enormes servidores em nuvem, computadores quânticos, IA, tudo. Mas, para entender como um computador quântico funciona, ainda precisamos entender o 0 e o 1. Porque isso é o fundamental, o mais básico pra computadores quânticos e a gente não consegue construir eles sem usar 0 e 1. A mesma coisa vale pro IA, a mesma coisa vale pra qualquer coisa relacionada a computador. E a mesma coisa vale pra nós. Não, não a ideia do 0 e 1, mas a ideia de entender os fundamentos. Eu aposto que se você entender o básico, vai conquistar muito mais controle e entendimento das suas próprias ações e também das ações dos outros.<\/p>\n\n<p>O núcleo 4 da sobrevivência são - Emoções, Ações, Reações, Ambiente. (Acho que são as 4 essenciais, mas se encontrarmos algo novo depois, adicionamos). Neste livro, vamos focar nas Emoções.<\/p>\n\n<p>Esta é a frase mais importante que eu quero que você entenda completamente antes de seguir em frente - o objetivo de qualquer animal (incluindo humanos) é sobreviver a si mesmos e manter a sobrevivência da espécie.<\/p>\n\n<p>Vamos começar.<\/p>\n\n<h2>Emotions are complex psychological and physiological states that arise in response to internal or external stimuli. They serve as signals — guiding behavior, communication, and decision-making.\n\nCommon categories include:\n\n- **Basic emotions** — happiness, sadness, anger, fear, surprise, disgust (Ekman's framework)\n- **Social emotions** — guilt, shame, pride, envy, empathy\n- **Self-conscious emotions** — evolving with认知发展, like moral emotions\n\nNeuroscience links them to brain regions like the amygdala (fear), prefrontal cortex (regulation), and limbic system. Emotions also have cultural dimensions — how we express, interpret, and value them varies across societies.\n\nWould you like me to dive deeper into any specific aspect — the psychology, neuroscience, cultural perspectives, or something else?<\/h2>\n\n<h3>Elais<\/h3>\n<p>Tudo que \"é bom\" entra nessa categoria. Eu até fiz uma pesquisa e descobri que não tem uma única palavra para qualquer tipo de felicidade e prazer. Então eu inventei uma. Elais. Elais é qualquer tipo de prazer e felicidade. Elais é tudo que é bom. O motivo do elais existir é porque a gente precisa sobreviver. Sempre que a gente é elaisado, a gente quer mais disso porque isso indica que esse fator melhora a sobrevivência.<\/p>\n<p>A gente fica elaise quando come alguma coisa, quando dorme, quando vê algo bonito, quando uma garota bonita está falando com você, quando você está com uma cara ótima, quando faz conexão com alguém rico etc. (eu podia escrever parágrafos inteiros sobre cada exemplo, mas você sabe que o prazo é apertado, desculpa). A gente se sente bem porque cada uma dessas coisas aumenta as chances de sobrevivência sua e da sua espécie. Quando você come, ganha energia pra sobreviver. Quando você dorme, preserva energia e repara danos no corpo, o que aumenta a sobrevivência. Quando você vê algo bonito, seu cérebro pensa \"isso é bom, não é ruim\", o que significa que você vai sobreviver. Quando uma garota bonita está falando com você, vocês podem dar certo, o que significa que sua espécie vai sobreviver porque sua prole terá genes mais bonitos. E por aí vai. Em resumo – quando a gente fica elaise, nossas chances de sobrevivência aumentam. Ou podemos dizer: quando nossas chances de sobrevivência aumentam, a gente fica elaise.<\/p>\n\n<h3>Medo<\/h3>\n<p>O medo dá medo porque ameaça nossa sobrevivência. E também quero que você pare de pensar em emoções como se fossem boas ou ruins, entenda os usos delas. O medo é considerado ruim porque sentimos essa emoção quando nossa sobrevivência está ameaçada. E além disso, esquece o que as pessoas te disseram, você vai entender o quê e o porquê mais pra frente.\n\nVamos lá: você tá andando na rua. Sozinho, tem algumas árvores, vento soprando, tá no crepúsculo, você tá curtindo a vibe. Aí de repente, você vê um cara. Grande, musculoso, com uma barra de metal na mão. Você vai sentir medo. Isso aconteceu comigo faz alguns dias. Fiquei um pouco assustado. Mesmo a pessoa sendo normal, mesmo você ver alguém assim e a pessoa ser a mais bondosa do mundo, você ainda vai sentir medo, pelo menos um pouco, a não ser que você seja lutador profissional.<\/p>\n<p>Uma coisa que você tem de tirar da cabeça, pelo menos enquanto lê, entende e usa este livro, é que não devemos julgar ninguém pela aparência. Sempre julgamos todo mundo pela aparência e fomos feitos assim. Todo animal é feito assim. Agora, voltando pro cara que vimos no nosso mundo imaginário, sim, o grandão com cavalo de ferro. O motivo de você se sentir com medo é que ele tem um físico melhor que o seu (mais força) e ainda tem uma arma (ainda mais força), e quando vemos alguém com mais poder, isso só significa que nossa sobrevivência está em risco. Por isso temos medo dele. E como eu disse, se você é um lutador profissional, não vai ser tem, porque você tem mais poder que ele e ele não representa ameaça à sua sobrevivência.<\/p>\n<p>Não é só esse tipo de medo, mas qualquer tipo. Eu não gosto muito de falar sobre redes sociais aleatórias e assuntos de autoajuda, mas esse encaixa no tema – medo de julgamento. Todo mundo diz: “não mantenha o medo de julgamento”, mas ninguém conta o que é e por que isso existe. A razão de a gente tem medo do julgamento é que somos um desses animais que vivem em grupos. Se a gente não segue o grupo, eles vão achar que não estamos alinhados e isso vira uma ameaça pra eles, então podem nos descartar. Se isso acontecer, a gente fica sozinho. Se você ficar sozinho, vira presa fácil. Não, não é porque não estamos mais na floresta, mas ainda temos isso profundo nos nossos genes.<\/p>\n<p>Medo de fracassar é o medo do e se eu fracassar? Não se preocupe, não vou te dar aquele conselho de guru de rede social. A gente tem medo de fracassar porque nossos recursos de tempo, energia e atenção são limitados. Na verdade, a gente nunca tem medo do fracasso, a gente tem medo de perder recursos limitados. Porque se a gente perder recursos, vai ter menos recursos. E alguém que tiver mais recursos do que a gente vai ter chances maiores de sobrevivência.<\/p>\n<p>Resumindo — medo é quando a sua sobrevivência está ameaçada. Então da próxima vez que sentir medo em qualquer situação, só se concentre em conectar isso ao mecanismo de sobrevivência e você pode sentir algo diferente.<\/p>\n\n<h3>Quer<\/h3>\n<p>Qualquer tipo de atração, desejo, meta entra nessa categoria. Você quer alguma coisa porque acredita que isso vai aumentar suas chances de sobrevivência. Você quer mais dinheiro, porque dinheiro é reserva de valor e dá pra comprar muita coisa dele, tipo comida, o que aumenta suas chances de sobrevivência. Você quer se casar com aquela garota que viu porque, pra você, ela é superior às outras. Ela é linda. E se você casar com ela, os filhos dela vão ter características melhores, e características melhores = mais recursos = maiores chances de sobrevivência. Aparência é muito, muito importante. As pessoas inventam coisas do tipo \"nossa, aparência não importa, o importante é ter um bom coração\". Eu discordo. A pessoa precisa ter os dois. Aparência não é algo objetivo, é subjetivo. A garota mais linda pra mim pode ser apenas uma garota comum pra você. {Isso é diferente do tópico mas eu lembrei disso — se você quer ficar bonito, acho que ter um corpo bom é o número um}. Ah, desculpa, eu esqueci o tópico, então, quando você quer alguma coisa, é só porque você quer melhores chances de sobrevivência. Todo mundo quer ser milionário porque os recursos, e portanto as chances de sobrevivência, são muito maiores do que os de uma pessoa comum e média. Em resumo: você quer alguma coisa justamente porque suas chances de sobrevivência aumentam.<\/p>\n\n<h3>Raiva<\/h3>\n<p>Você sente raiva quando algo está dando errado e você não consegue controlar isso mentalmente. A gente pode comparar com a expressão \"lutar ou fugir\": a raiva é a luta. O córtex pré-frontal do cérebro fica suprimido, que é a parte responsável pelo raciocínio e pela lógica, e isso nos ajuda a entender por que as pessoas se matam por motivos idiotas. Raiva é bem obviamente um instinto de sobrevivência.<\/p>\n<p>Imagine que você tinha um plano de festa e estava se preparando por um mês. Você não é muito de festa, mas resolveu fazer pelo menos uma vez pra não ficar de fora. Você se certificou de que ninguém estava ocupado no dia e que todas as pessoas que você queria que soubessem estariam disponíveis. Você comprou comida, decoração, reservou o local e, finalmente, estava prestes a fazer a festa. Ou posso dizer que estava. Porque tem um cara que não aguenta ver você feliz. Ele reservou o salão por um preço mais alto. Ele roubou sua comida. Queimou sua decoração. Você ficou envergonhado na frente das pessoas especiais pra você. Toda a diversão, foi embora. Naquele momento, você queria matar ele. Honestamente, eu não acho que você quer matar ele porque ele estragou algo. Como já está feito. Mas você tá realmente muito bravo porque você só viu o que ele é capaz de fazer e você quer evitar que isso se repita. Você não consegue controlar o dano que já foi feito, mas pode controlar os danos futuros. Matar ele é a forma definitiva de impedir que ele faça de novo. Mas não faz isso, senão a polícia vai culpar eu por manipular você através do meu livro. Também sei que você não é tão fácil de ser manipulado. Enfim, em resumo — você não fica bravo porque alguém fez algo errado, você fica bravo pra evitar que isso se repita.<\/p>\n\n<h3>Inveja<\/h3>\n<p>Primeiro de tudo, \"CIÚMES E INVEJA NÃO SÃO RUINS\". São instintos de sobrevivência. Eu acabei de pesquisar e descobri que sim, os animais também ficam ciumentos. Ciúmes não é pecado. É a mensagem do seu cérebro dizendo \"você vai morrer\". Sério. Deixa eu explicar. Todo mundo fica ciumento das pessoas que têm algo que você não tem. Pode ser dinheiro, status, conquistas, amor, qualquer coisa. Até uma criança fica ciumenta da outra criança que tem um doce. Ciúmes é o sinal de que alguém tem algo que você não tem. Desde o começo da vida, quem tem mais recursos tem mais chances de sobreviver. Qualquer recurso.<\/p>\n<p>Era menos complicado quando a gente era animal. Os únicos recursos que importavam eram parceiro pra procriar e comida. Simples assim. Se você tiver mais comida, vai viver mais, é claro. E se tiver um parceiro pra procriar, sua espécie vai sobreviver e não vai se extinguir. Sem comida, você morre; sem parceiro, a sua espécie morre. Simples. Comida e parceiro, só isso. Era incrível, né? Mas agora, pindaíra, a gente tem tantas coisas. Cada uma das coisas que você tem é um recurso. O aparelho que você tá usando pra ler isso, a roupa, a comida na sua geladeira, o dinheiro que você tem, sua mesa, seus amigos, tudo.<\/p>\n<p>Então, quando você vê alguém com algo que você não tem, digamos, um carro bem caro. Como isso impacta? Quando as pessoas veem, elas vão até ele porque ele tem um carro melhor, o que indica que ele tem mais recursos, ou seja, dinheiro. Todo mundo quer estar no grupo com mais recursos pra aumentar as chances de sobrevivência. E quando eles vão até esse cara, quem fica pra trás? Você. O cara que já tem recursos, os recursos dele estão aumentando. E você, que tinha menos, tá vendo seus recursos diminuírem. Injusto. Ficar sozinho faz os predadores te caçarem facilmente. Isso é ruim. Então, seu cérebro te dá uma sensação. Ciúme. E é assim que funciona. Mas não se preocupa, nessa época não existem predadores. Mas a gente tem isso nos genes, então não tem como fugir. Em resumo - quando você vê alguém com um recurso específico que você não tem, você sente inveja.<\/p>\n\n<h3>Tristeza<\/h3>\n<p>Todos já sentimos isso. Mas o que é isso. Na verdade, aprendi isso agora enquanto escrevo isso. E eu não sabia que era assim. Quando você perde algo ou algo ruim acontece, você fica triste. Se isso acontecer comigo, eu também ficarei triste. Por quê. Isso também é um mecanismo de sobrevivência. Quando perdemos algo, já perdemos um recurso. Pode ser qualquer coisa, seu ente querido, sua coisa favorita, o que você queria fazer, consideraremos tudo como um recurso. (Não me veja como alguém de coração frio. Eu digo isso para explicar). Quando perdemos um recurso, não queremos mais problemas como esse. Por isso, quando ficamos tristes, não queremos fazer nada. Não queremos falar, trabalhar, comer, nada. Porque nesse momento, estamos economizando o que temos. Nossa energia. Se você perdeu algo, suas chances de sobrevivência já estão baixas devido à redução dos seus recursos. Agora fazer qualquer coisa significa que seu tempo, energia e atenção também serão usados e isso resultará em uma redução ainda maior de recursos, o que diminuirá ainda mais suas chances de sobrevivência e eventualmente levará à morte. Isso não é o que realmente vai acontecer, mas pensamos assim. Em resumo - Quando perdemos algo, ficamos tristes e não fazemos nada que exija energia para salvar e aumentar nossas chances de sobrevivência.<\/p>\n\n<p>Feito. Eu sei que posso e preciso escrever mais detalhes, mas acho que vai ficar confuso se eu exagerar. Também, você lembra o que eu disse no começo? ‘Estou escrevendo este livro à be da minha data limite. E se eu não terminar hoje, vai dar trabalho.’ E não é esse ‘hoje’. Já se passaram três dias. E se eu não terminar hoje, vou estar realmente encrencado e vai bagunçar tudo. Enfim, o livro está pronto. Mas o tema não. É um assunto tão grande que não dá para cobrir nem em um ano. Então, vamos continuar nossa jornada.<\/p>\n\n<p>Te vejo.<br>\nSeu amigo,<br>\n<strong>Samarth Kulkarni<\/strong><\/p>\n    "
+  }
+];
+
+// ─── Firebase init ────────────────────────────────────────────────────────────
+firebase.initializeApp({
+  apiKey: "AIzaSyDSi-_yS2SeW6QqvSxfkJ7RHJZ-ArMz0j0",
+  authDomain: "perspective-library.firebaseapp.com",
+  projectId: "perspective-library",
+  storageBucket: "perspective-library.firebasestorage.app",
+  messagingSenderId: "960053593256",
+  appId: "1:960053593256:web:030144d380de81dcf12e9d"
+});
+
+const auth = firebase.auth();
+const db   = firebase.firestore();
+
+// ─── Elements ─────────────────────────────────────────────────────────────────
+const loadingScreen     = document.getElementById('loading-screen');
+const authScreen        = document.getElementById('auth-screen');
+const libraryScreen     = document.getElementById('library-screen');
+const btnGoogle         = document.getElementById('btn-google');
+const emailForm         = document.getElementById('email-form');
+const fieldName         = document.getElementById('field-name');
+const fieldEmail        = document.getElementById('field-email');
+const fieldPassword     = document.getElementById('field-password');
+const btnEnter          = document.getElementById('btn-enter');
+const authError         = document.getElementById('auth-error');
+const btnSignout        = document.getElementById('btn-signout');
+const userNameEl        = document.getElementById('user-name-el');
+const userAvatarEl      = document.getElementById('user-avatar-el');
+const bookGrid          = document.getElementById('book-grid');
+const emptyState        = document.getElementById('empty-state');
+const modalOverlay      = document.getElementById('modal-overlay');
+const modalClose        = document.getElementById('modal-close');
+const modalTitle        = document.getElementById('modal-title');
+const modalSubtitle     = document.getElementById('modal-subtitle');
+const modalEyebrow      = document.getElementById('modal-eyebrow');
+const modalCoverBar     = document.getElementById('modal-cover-bar');
+const modalContent      = document.getElementById('modal-content');
+const modalProgressWrap = document.getElementById('modal-progress-wrap');
+const modalProgressFill = document.getElementById('modal-progress-fill');
+const modalProgressText = document.getElementById('modal-progress-text');
+const modalCompletedTxt = document.getElementById('modal-completed-text');
+
+// ─── Auth state ───────────────────────────────────────────────────────────────
+let currentUser = null;
+
+const authTimeout = setTimeout(() => {
+  if (loadingScreen.style.display !== 'none') {
+    loadingScreen.style.display = 'none';
+    showAuth();
+  }
+}, 5000);
+
+auth.onAuthStateChanged(user => {
+  clearTimeout(authTimeout);
+  loadingScreen.style.display = 'none';
+  currentUser = user;
+  if (user) {
+    showLibrary(user);
+  } else {
+    showAuth();
+  }
+});
+
+function showAuth() {
+  authScreen.style.display    = 'block';
+  libraryScreen.style.display = 'none';
+}
+
+function showLibrary(user) {
+  authScreen.style.display    = 'none';
+  libraryScreen.style.display = 'flex';
+  const name = user.displayName || user.email?.split('@')[0] || "Leitor";
+
+  if (user.photoURL) {
+    userAvatarEl.innerHTML = `<img src="${user.photoURL}" alt="${name}" />`;
+  } else {
+    userAvatarEl.textContent = name[0].toUpperCase();
+  }
+  renderBooks();
+  openFromHash();
+}
+
+// ─── Google sign-in ───────────────────────────────────────────────────────────
+btnGoogle.addEventListener('click', async () => {
+  clearError();
+  const provider = new firebase.auth.GoogleAuthProvider();
+  try {
+    await auth.signInWithPopup(provider);
+  } catch (err) {
+    showError(friendlyError(err.code));
+  }
+});
+
+// ─── Email form ───────────────────────────────────────────────────────────────
+emailForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  clearError();
+  const name     = fieldName.value.trim();
+  const email    = fieldEmail.value.trim();
+  const password = fieldPassword.value;
+
+  if (!email || !password) return;
+
+  btnEnter.disabled    = true;
+  btnEnter.textContent = "Entrando…";
+
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (err) {
+    if (
+      err.code === 'auth/user-not-found' ||
+      err.code === 'auth/invalid-credential' ||
+      err.code === 'auth/invalid-email'
+    ) {
+      try {
+        const cred = await auth.createUserWithEmailAndPassword(email, password);
+        if (name) await cred.user.updateProfile({ displayName: name });
+      } catch (signupErr) {
+        showError(friendlyError(signupErr.code));
+        btnEnter.disabled    = false;
+        btnEnter.textContent = "Entrar na biblioteca";
+        return;
+      }
+    } else if (err.code === 'auth/wrong-password') {
+      showError("Senha incorreta.");
+      btnEnter.disabled    = false;
+      btnEnter.textContent = "Entrar na biblioteca";
+      return;
+    } else {
+      showError(friendlyError(err.code));
+      btnEnter.disabled    = false;
+      btnEnter.textContent = "Entrar na biblioteca";
+      return;
+    }
+  }
+
+  btnEnter.disabled    = false;
+  btnEnter.textContent = "Entrar na biblioteca";
+});
+
+// ─── Sign out ─────────────────────────────────────────────────────────────────
+btnSignout.addEventListener('click', () => auth.signOut());
+
+// ─── Error helpers ────────────────────────────────────────────────────────────
+function showError(msg) {
+  authError.textContent   = msg;
+  authError.style.display = 'block';
+}
+function clearError() {
+  authError.style.display = 'none';
+  authError.textContent   = '';
+}
+function friendlyError(code) {
+  const map = {
+    'auth/invalid-email':          "Digite um e-mail válido.",
+    'auth/user-disabled':          "Esta conta foi desativada.",
+    'auth/user-not-found':         "Nenhuma conta encontrada. Confira seu e-mail ou cadastre-se.",
+    'auth/wrong-password':         "Senha incorreta.",
+    'auth/email-already-in-use':   "Já existe uma conta com este e-mail.",
+    'auth/weak-password':          "A senha deve ter pelo menos 6 caracteres.",
+    'auth/popup-closed-by-user':   "O login com o Google foi cancelado.",
+    'auth/network-request-failed': "Erro de rede. Verifique sua conexão.",
+    'auth/invalid-credential':     "E-mail ou senha incorretos.",
+    'auth/too-many-requests':      "Muitas tentativas. Tente novamente mais tarde.",
+  };
+  return map[code] || "Algo deu errado. Tente novamente.";
+}
+
+// ─── Reading time helper ──────────────────────────────────────────────────────
+function readingTime(content, isHtml) {
+  if (!content) return null;
+  const text = isHtml ? content.replace(/<[^>]+>/g, ' ') : content;
+  const words = text.trim().split(/\s+/).length;
+  const mins  = Math.max(1, Math.round(words / 200));
+  return `${mins} min de leitura`;
+}
+
+// ─── Book grid ────────────────────────────────────────────────────────────────
+const DEFAULT_COLORS = [
+  'linear-gradient(150deg, #1a1a1a, #3a3a3a)',
+  'linear-gradient(150deg, #111, #2e2e2e)',
+  'linear-gradient(150deg, #1e1e1e, #444)',
+  'linear-gradient(150deg, #151515, #333)',
+  'linear-gradient(150deg, #0f0f0f, #2a2a2a)',
+  'linear-gradient(150deg, #1c1c1c, #3e3e3e)',
+  'linear-gradient(150deg, #121212, #262626)',
+  'linear-gradient(150deg, #181818, #383838)',
+  'linear-gradient(150deg, #101010, #303030)',
+];
+
+function renderBooks() {
+  bookGrid.innerHTML = '';
+
+  if (ARTICLES.length === 0) {
+    emptyState.style.display = 'block';
+    bookGrid.style.display   = 'none';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  bookGrid.style.display   = 'grid';
+
+  ARTICLES.forEach((article, i) => {
+    const color = article.color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+    const rt    = readingTime(article.content, article.isHtml);
+
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML = `
+      <div class="book-cover" style="background: ${color}">
+        <div class="book-category">${article.category || ''}</div>
+        <div class="book-title-cover">${article.title}</div>
+      </div>
+      <div class="book-meta">
+        <div class="book-title-below">${article.title}</div>
+        ${article.subtitle ? `<div class="book-subtitle-below">${article.subtitle}</div>` : ''}
+        ${rt ? `<div class="book-readtime">${rt}</div>` : ''}
+      </div>
+    `;
+    card.addEventListener('click', () => openModal(article, color));
+    bookGrid.appendChild(card);
+  });
+}
+
+// ─── Firestore helpers ────────────────────────────────────────────────────────
+function sanitize(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+}
+function progressDocId(email, title) {
+  return sanitize(email) + '_' + sanitize(title);
+}
+async function loadProgress(email, title) {
+  try {
+    const snap = await db.collection('progress').doc(progressDocId(email, title)).get();
+    return snap.exists ? snap.data() : null;
+  } catch { return null; }
+}
+async function saveProgress(email, title, percent, completed) {
+  try {
+    await db.collection('progress').doc(progressDocId(email, title)).set({
+      email, bookTitle: title, percent, completed
+    });
+  } catch { /* silent */ }
+}
+
+// ─── Modal + progress tracking ────────────────────────────────────────────────
+let scrollListener   = null;
+let saveDebounce     = null;
+let currentBookTitle = '';
+let isCompleted      = false;
+
+async function openModal(article, color, fromUrl) {
+  currentBookTitle = article.title;
+  isCompleted      = false;
+  if (!fromUrl) {
+    const want = '#book/' + slugOf(article);
+    if (location.hash !== want) history.pushState({ book: slugOf(article) }, '', location.pathname + location.search + want);
+  }
+
+  modalCoverBar.style.background = color;
+  modalEyebrow.textContent       = article.category || '';
+  modalTitle.textContent         = article.title    || '';
+  modalSubtitle.textContent      = article.subtitle || '';
+  modalSubtitle.style.display    = article.subtitle ? 'block' : 'none';
+
+  if (article.content) {
+    modalContent.className = 'modal-body';
+    if (article.isHtml) {
+      modalContent.innerHTML = article.content;
+    } else {
+      modalContent.textContent = article.content;
+    }
+  } else {
+    modalContent.className   = 'modal-body-empty';
+    modalContent.textContent = "Conteúdo do livro em breve.";
+  }
+
+  modalProgressWrap.style.display = 'none';
+  modalCompletedTxt.style.display = 'none';
+  modalProgressFill.style.width   = '0%';
+  modalProgressText.textContent   = "0% concluído";
+
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modalOverlay.scrollTop = 0;
+
+  if (currentUser && article.content) {
+    const saved = await loadProgress(currentUser.email, article.title);
+    if (saved && saved.completed) {
+      isCompleted = true;
+      showCompletedState();
+    } else {
+      showProgressBar(saved ? saved.percent || 0 : 0);
+      if (saved && saved.percent > 0) {
+        const totalScroll = modalOverlay.scrollHeight - modalOverlay.clientHeight;
+        modalOverlay.scrollTop = (saved.percent / 100) * totalScroll;
+      }
+    }
+  } else if (article.content) {
+    showProgressBar(0);
+  }
+
+  if (article.content) {
+    scrollListener = () => onModalScroll();
+    modalOverlay.addEventListener('scroll', scrollListener);
+  }
+}
+
+function showProgressBar(pct) {
+  modalProgressWrap.style.display = 'block';
+  modalCompletedTxt.style.display = 'none';
+  modalProgressFill.style.width   = pct + '%';
+  modalProgressText.textContent   = Math.round(pct) + "% concluído";
+}
+
+function showCompletedState() {
+  modalProgressWrap.style.display = 'none';
+  modalCompletedTxt.style.display = 'block';
+}
+
+function onModalScroll() {
+  if (isCompleted) return;
+  const el    = modalOverlay;
+  const total = el.scrollHeight - el.clientHeight;
+  const pct   = total <= 0 ? 100 : Math.min(100, Math.round((el.scrollTop / total) * 100));
+
+  modalProgressFill.style.width = pct + '%';
+  modalProgressText.textContent = pct + "% concluído";
+
+  if (pct >= 100) {
+    isCompleted = true;
+    showCompletedState();
+    if (currentUser) saveProgress(currentUser.email, currentBookTitle, 100, true);
+    return;
+  }
+
+  if (saveDebounce) clearTimeout(saveDebounce);
+  saveDebounce = setTimeout(() => {
+    if (currentUser) saveProgress(currentUser.email, currentBookTitle, pct, false);
+  }, 3000);
+}
+
+function closeModal(fromUrl) {
+  const wasOpen = modalOverlay.classList.contains('open');
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (scrollListener) {
+    modalOverlay.removeEventListener('scroll', scrollListener);
+    scrollListener = null;
+  }
+  if (saveDebounce) {
+    clearTimeout(saveDebounce);
+    saveDebounce = null;
+  }
+  // deep link: take the book out of the URL (no scroll, no reload)
+  if (wasOpen && !fromUrl && findBookByHash()) {
+    if (history.state && history.state.book) history.back();
+    else history.replaceState(null, '', location.pathname + location.search);
+  }
+}
+
+modalClose.addEventListener('click', () => closeModal());
+modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ─── Deep links: every book has its own URL (#book/<slug>) — UI unchanged ────
+// Example: https://samarthkulkarni16.github.io/perspective-library-pt/#book/survival
+// Query strings (utm_*) are kept. Old links (#survival, #how-to-use-anger-to-your-advantage) still open the book.
+function slugOf(a) { return a.slug || legacySlugOf(a); }
+function legacySlugOf(a) { return String(a.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function colorFor(a) { return a.color || DEFAULT_COLORS[ARTICLES.indexOf(a) % DEFAULT_COLORS.length]; }
+function findBookByHash() {
+  let key = '';
+  try { key = decodeURIComponent(location.hash || ''); } catch (e) { key = location.hash || ''; }
+  key = key.replace(/^#/, '').replace(/^book\//, '').toLowerCase();
+  if (!key) return null;
+  return ARTICLES.find(a => slugOf(a) === key || legacySlugOf(a) === key) || null;
+}
+function openFromHash() {
+  const a = findBookByHash();
+  const isOpen = modalOverlay.classList.contains('open');
+  if (a) {
+    if (isOpen && currentBookTitle === a.title) return;
+    if (isOpen) closeModal(true);
+    window.scrollTo(0, 0);
+    openModal(a, colorFor(a), true);
+  } else if (isOpen) {
+    closeModal(true);
+  }
+}
+window.addEventListener('hashchange', () => { if (currentUser) openFromHash(); });
+
+</script>
+
+<section id="seo-preview">
+  <h1>Perspective Library — Livros gratuitos sobre psicologia, emoções e mentalidade</h1>
+  <p class="intro">Livros curtos e práticos de Samarth Kulkarni sobre por que sentimos e agimos do jeito que agimos — zero enrolação, zero frescura. Faça login acima para ler qualquer livro na íntegra, de graça.</p>
+
+  <article id="how-to-use-anger-to-your-advantage">
+    <div class="cat">Emoções</div>
+    <h2>Como usar a raiva a seu favor</h2>
+    <div class="sub">A raiva não é um problema se você sabe o que ela é</div>
+    <p>Raiva é a emoção que você sente quando acha que algo está errado. Não importa se na verdade está certo ou errado — se você sente, fica bravo. Este livro explica o que acontece no seu corpo e cérebro quando você fica bravo, e como usar essa energia ao invés de ser controlado por ela.</p>
+  </article>
+
+  <article id="use-procrastination-to-your-advantage">
+    <div class="cat">Produtividade</div>
+    <h2>Use a procrastinação a seu favor</h2>
+    <div class="sub">Pare de lutar contra ela. Comece a redirecioná-la.</div>
+    <p>Procrastinação não é um problema de força de vontade — é o cérebro escolhendo a recompensa imediata em vez do ganho a longo prazo porque ele foi programado para priorizar a sobrevivência agora em vez da sobrevivência depois. Este livro explica por que a procrastinação acontece e como redirecioná‑la ao invés de lutar contra ela.</p>
+  </article>
+
+  <article id="use-conflicts-to-your-advantage">
+    <div class="cat">Mentalidade</div>
+    <h2>Use os conflitos a seu favor</h2>
+    <div class="sub">Você não precisa fugir dos problemas. Precisa fazer upgrade neles.</div>
+    <p>Você não se livra dos problemas, você faz upgrade deles — os conflitos nunca realmente terminam. Este livro mostra como identificar, organizar e substituir os conflitos da sua vida, para que você esteja sempre trocando problemas piores por melhores.</p>
+  </article>
+
+  <article id="survival">
+    <div class="cat">Psicologia</div>
+    <h2>Sobrevivência</h2>
+    <div class="sub">Entendendo a base de tudo o que fazemos.</div>
+    <p>Somos animais, e tudo que fazemos volta ao mecanismo de sobrevivência — os quatro essenciais são emoções, ações, reações e ambiente. Este livro foca nas emoções: por que sentimos prazer, medo e desejo, e como cada uma existe apenas para nos manter vivos.</p>
+  </article>
+
+  <p class="cta">Todos os quatro livros são gratuitos para ler na íntegra — <a href="#auth-screen">faça login com o Google para começar a ler</a>.</p>
+</section>
+
+</body>
+</html>
